@@ -32,11 +32,21 @@ public class UserService {
 		Role userRole = roleRepository.findByRole(user.getRoles().iterator().next().getRole().toString());
 		log.info("r" +userRole);
 		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+		user.setActive(true);
 		userRepository.save(user);
 	}
 	
 	public void deleteUser(int id) {
 		userRepository.deleteById(id);
+	}
+	
+	public User findUserByEmail(String email, String password) {
+		User user = userRepository.findByEmail(email);
+		if (password.equalsIgnoreCase(user.getPassword())) {
+			return user;
+		} else {
+			return null;
+		}
 	}
 
 }

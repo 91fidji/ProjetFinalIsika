@@ -46,4 +46,9 @@ public class UserController {
 	public void deleteUser(@PathVariable int id) {
 		userService.deleteUser(id);
 	}
+	
+	@GetMapping("/user")
+	public User user(String userInString, String password) {
+		return userService.findUserByEmail(userInString, password);
+	}
 }

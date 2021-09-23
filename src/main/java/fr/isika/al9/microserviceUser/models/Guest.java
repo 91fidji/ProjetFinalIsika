@@ -12,11 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import lombok.Data;
 
 @Entity
 @Data
+@Table(name="guests")
 public class Guest {
 	
 	@Id
@@ -27,7 +29,7 @@ public class Guest {
 	
 	private String prenom;
 	
-	private String email;
+	private String email;	
 	
 	private LocalDate dateOfBirth;
 	
