@@ -1,22 +1,16 @@
 package fr.isika.al9.microserviceUser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 
 @SpringBootTest
 class MicroserviceUserApplicationTests {
 	
-
 	@Test
 	void contextLoads() {
+	     assertEquals("truc", "truc");
 	}
 	
-	@Test
-	@Rollback(false)
-	void shouldCreateUser() {
-		
-		
-	}
-
 }

@@ -1,19 +1,12 @@
 package fr.isika.al9.microserviceUser;
 
-import java.util.HashSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 import fr.isika.al9.microserviceUser.dao.DestinationRepository;
 import fr.isika.al9.microserviceUser.dao.RoleRepository;
 import fr.isika.al9.microserviceUser.dao.UserRepository;
-import fr.isika.al9.microserviceUser.models.Destination;
-import fr.isika.al9.microserviceUser.models.Role;
-import fr.isika.al9.microserviceUser.models.User;
 
 @SpringBootApplication
 public class MicroserviceUserApplication {
