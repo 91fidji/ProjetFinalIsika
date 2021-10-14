@@ -1,5 +1,6 @@
 package fr.isika.al9.microserviceUser;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ class MicroserviceUserApplicationTests {
 	
 	@Test
 	void contextLoads() {
-	     assertEquals("truc", "truc");
+	     assertNotNull(getClass());
 	}
 	
 }
