@@ -1,6 +1,7 @@
 package fr.isika.al9.microserviceUser.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -10,8 +11,10 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	
 	public void deleteById(Integer id);
 	
-	User findByEmail(String email);
+	Optional<User> findByEmail(String email);
 	
 	List<User> findByRoles(String role);
+
+	public boolean existsByEmail(String email);
 
 }

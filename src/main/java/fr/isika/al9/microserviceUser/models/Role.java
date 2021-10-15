@@ -17,11 +17,12 @@ public class Role {
 	@Column(name="role_id")
 	private int id;
 	
-	private String role;
+	@Enumerated(EnumType.STRING)
+	private Erole role;
 	
 	public Role() {}
 	
-	public Role(int id, String role) {
+	public Role(int id, Erole role) {
 		this.id = id;
 		this.role = role;
 	}
@@ -39,11 +40,11 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getRole() {
+	public Erole getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Erole role) {
 		this.role = role;
 	}
 

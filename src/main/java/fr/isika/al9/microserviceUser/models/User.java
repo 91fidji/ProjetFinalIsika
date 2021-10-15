@@ -22,7 +22,7 @@ import lombok.Data;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private int id;
 	private String name;
@@ -51,6 +51,13 @@ public class User {
 		this.email= email;
 		this.password = password;
 		this.roles = roles;
+	}
+
+	public User(String email, String name, String firstname, String password) {
+		this.firstname = firstname;
+		this.name = name;
+		this.email= email;
+		this.password = password;
 	}
 
 	public Integer getId() {
