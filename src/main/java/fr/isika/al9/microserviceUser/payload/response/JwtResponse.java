@@ -2,16 +2,14 @@ package fr.isika.al9.microserviceUser.payload.response;
 
 import java.util.List;
 
-import fr.isika.al9.microserviceUser.models.Role;
-
 public class JwtResponse {
 	private String token;
 	private String type = "Bearer";
-	private Long id;
+	private int id;
 	private String email;
 	private List<String> roles;
 
-	public JwtResponse(String accesstoken, Long id, String email, List<String> roles) {
+	public JwtResponse(String accesstoken, int id, String email, List<String> roles) {
 		this.token = accesstoken;
 		this.id = id;
 		this.email = email;
@@ -34,11 +32,11 @@ public class JwtResponse {
 		this.type = tokenType;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

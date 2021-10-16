@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import fr.isika.al9.microserviceUser.models.User;
 
+@Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
 	
 	public void deleteById(Integer id);

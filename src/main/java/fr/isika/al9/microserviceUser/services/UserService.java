@@ -3,6 +3,7 @@ package fr.isika.al9.microserviceUser.services;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,9 +41,9 @@ public class UserService {
 		userRepository.deleteById(id);
 	}
 	
-	public User findUserByEmail(String email, String password) {
-		User user = userRepository.findByEmail(email);
-		if (password.equalsIgnoreCase(user.getPassword())) {
+	public Optional<User> findUserByEmail(String email, String password) {
+		Optional<User> user = userRepository.findByEmail(email);
+		if (password.equalsIgnoreCase(user.get().getPassword())) {
 			return user;
 		} else {
 			return null;

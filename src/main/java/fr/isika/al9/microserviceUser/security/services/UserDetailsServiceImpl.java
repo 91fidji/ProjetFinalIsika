@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.isika.al9.microserviceUser.dao.UserRepository;
-import fr.isika.al9.microserviceUser.exceptions.UserEmailNotFoundException;
 import fr.isika.al9.microserviceUser.models.User;
 
 @Service
@@ -19,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		User user = userRepository.findByEmail(email).orElseThrow(() -> new UserEmailNotFoundException("User not found "+email));
+		User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found "+email));
 		return UserDetailsImpl.build(user);
 	}
 

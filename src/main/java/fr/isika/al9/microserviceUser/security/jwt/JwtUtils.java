@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.sun.org.apache.xml.internal.security.algorithms.SignatureAlgorithm;
-
 import fr.isika.al9.microserviceUser.security.services.UserDetailsImpl;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtUtils {
@@ -19,7 +19,7 @@ public class JwtUtils {
 	@Value("${travelQuote.app.secret}")
 	private String jwtSecret;
 	
-	@Value("${travelQuote.app.jwtExpirationMs}")
+	@Value("${travelQuote.app.jwtExpirationMs:3600000}")
 	private int jwtExpirationMs;
 
 	public String generateJwtToken(Authentication authentication) {
@@ -28,22 +28,18 @@ public class JwtUtils {
 				.setSubject((userPrincipal.getEmail()))
 				.setIssuedAt(new Date())
 				.setExpiration(new Date((new Date()).getTime()+jwtExpirationMs))
-				.signinWith(SignatureAlgorithm.HS512, jwtSecret)
+				.signWith(SignatureAlgorithm.HS512, jwtSecret)
 				.compact();
 	}
 	
-	public String getUserEmailFromJwtToken() {
-		return Jwts.parser().setSigninKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+	public String getEmailFromJwtToken(String token) {
+		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
 	}
 
-	public String getEmailFromJwtToken(String jwt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public boolean validateJwtToken(String authToken) {
 		try {
-			Jwts.parser().setSigninKey(jwtSecret).parseClaimsJws(authToken);
+			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
 			return true;
 		} catch(Exception e) {
 			log.error("Invalid JWT signature: {}", e.getMessage());

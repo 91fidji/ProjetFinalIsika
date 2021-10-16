@@ -5,52 +5,42 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import fr.isika.al9.microserviceUser.models.User;
 
-
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
-	
+
 	private int id;
 	private String email;
-	
+
 	@JsonIgnore
 	private String password;
 
 	public Collection<? extends GrantedAuthority> authorities;
-	
-	
-	public UserDetailsImpl(
-			int id, 
-			String email, 
-			String password, 
-			Collection<? extends GrantedAuthority> authorities){
-		this.id =id;
+
+	public UserDetailsImpl(int id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+		this.id = id;
 		this.email = email;
-		this.password =password;
-		this.authorities = authorities; 
+		this.password = password;
+		this.authorities = authorities;
 	}
-	
+
 	public static UserDetailsImpl build(User user) {
 		List<GrantedAuthority> authorities = user.getRoles().stream()
-				.map(role -> new SimpleGrantedAuthority(role.getName().name()))
-				.collect(Collectors.toList());
-		
-		return new UserDetailsImpl(
-				user.getId(),
-				user.getEmail(),
-				user.getPassword(),
-				authorities);
+				.map(role -> new SimpleGrantedAuthority(role.getRole().name())).collect(Collectors.toList());
+
+		return new UserDetailsImpl(user.getId(), user.getEmail(), user.getPassword(), authorities);
 	}
 
 	public int getId() {
 		return this.id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -58,15 +48,14 @@ public class UserDetailsImpl implements UserDetails {
 	public String getEmail() {
 		return this.email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.password;
 	}
 
 	@Override
@@ -103,6 +92,5 @@ public class UserDetailsImpl implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
 	}
-
 
 }

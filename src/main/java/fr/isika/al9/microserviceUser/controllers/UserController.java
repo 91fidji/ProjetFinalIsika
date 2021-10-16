@@ -1,6 +1,7 @@
 package fr.isika.al9.microserviceUser.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +49,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/user")
-	public User user(String userInString, String password) {
+	public Optional<User> user(String userInString, String password) {
 		return userService.findUserByEmail(userInString, password);
 	}
 }
