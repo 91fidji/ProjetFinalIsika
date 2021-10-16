@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -56,7 +57,7 @@ public class AuthController {
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest){
 		
 		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 	
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
@@ -75,7 +76,7 @@ public class AuthController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest){
-		
+		Logger log = LoggerFactory.getLogger(this.getClass());
 		if (userRepository.existsByEmail(signupRequest.getEmail())) {
 			return ResponseEntity
 					.badRequest()
@@ -116,6 +117,7 @@ public class AuthController {
 			});	
 		}
 		user.setRoles(roles);
+		log.info("user"+user);
 		userRepository.save(user);
 		return ResponseEntity.ok(new MessageResponse("User registered successfully"));
 

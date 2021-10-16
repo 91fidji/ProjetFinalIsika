@@ -2,8 +2,18 @@ package fr.isika.al9.microserviceUser.payload.response;
 
 public class MessageResponse {
 
-	public MessageResponse(String string) {
-		// TODO Auto-generated constructor stub
+	private String message;
+
+	public MessageResponse(String message) {
+	    this.message = message;
+	  }
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 }
