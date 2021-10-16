@@ -3,6 +3,8 @@ package fr.isika.al9.microserviceUser.security.services;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Objects;
+
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
