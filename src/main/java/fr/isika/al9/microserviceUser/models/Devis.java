@@ -28,9 +28,14 @@ public class Devis {
 
 	private String villeDepart;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	private User user;
+	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Guest guest;
 	
+
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="productList", joinColumns = @JoinColumn(name="devis_id"),inverseJoinColumns = @JoinColumn(name="product_id"))
 	private Set<Product> produit;
@@ -99,5 +104,20 @@ public class Devis {
 		this.nomDevis = nomDevis;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Guest getGuest() {
+		return guest;
+	}
+
+	public void setGuest(Guest guest) {
+		this.guest = guest;
+	}
 
 }
